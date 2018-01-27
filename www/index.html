@@ -131,6 +131,23 @@
             function successCB() {
                 alert("DB operation completed successfully.");          
             }
+
+            function MostrarDetalle(control){
+
+                // var contenido = $(control).attr("datosUrl")
+
+                var contenido = '<div class="row">' +
+                                '<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">' +
+                                    'Foto de la persona' +
+                                '</div>';
+
+                $('#bodyModalDetalle').html(contenido);
+
+                $('#modalDetalle').modal('show').on('hidden.bs.modal', function () {
+                    
+                    $('#bodyModalDetalle').html("<img src='img/loading-spinner-grey.gif' alt='' class='loading'><span> &nbsp;&nbsp;Cargando... </span>");
+                });
+            };
             
         </script>
     </head>
