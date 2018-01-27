@@ -60,7 +60,7 @@
             
             function querySuccess(tx, results) {
                 //alert("Returned rows = " + results.rows.length);
-                var s = '<table data-toggle="table"  class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >' +
+                var s = '<table data-toggle="table" id="tablaDatos" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >' +
                             '<thead>' +
                                 '<tr>' +
                                     '<th data-width="1%" data-field="No" data-sortable="true">#</th>' +
@@ -92,7 +92,12 @@
                 s += '</tbody>' +
                     '</table>';
                 
-                document.getElementById("listadoPersonas").innerHTML = s;               
+                document.getElementById("listadoPersonas").innerHTML = s;      
+
+                var $table = $('#tablaDatos');
+
+                // $table.bootstrapTable('destroy');   
+                $table.bootstrapTable('refresh', {silent: true});       
             }
             
             function querySuccess1(tx, result) {
