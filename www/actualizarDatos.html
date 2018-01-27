@@ -41,7 +41,7 @@
             
             
             function querySuccess1(tx, result) {
-                alert("Second Query : " + result.rows.length);
+                alert("Second Query : ");
             }
             
             function errorCB(err) {
@@ -58,7 +58,7 @@
             }
 
             function deleteTable(tx) {
-                tx.executeSql("TRUNCATE TABLE Asistentes",
+                tx.executeSql("DELETE FROM Asistentes",
                         [], querySuccess1, errorCB);
             }
             
