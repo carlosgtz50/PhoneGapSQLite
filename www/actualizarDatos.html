@@ -58,7 +58,7 @@
             }
 
             function deleteTable(tx) {
-                tx.executeSql("DELETE FROM Asistentes",
+                tx.executeSql("TRUNCATE TABLE Asistentes",
                         [], querySuccess1, errorCB);
             }
             
@@ -180,7 +180,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="informeGob.limpiar();">
+                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="goDelete();">
                                                         <span>
                                                             <i class="la la-refresh"></i>
                                                             <span>
