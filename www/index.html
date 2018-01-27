@@ -125,10 +125,10 @@
                     idCategoria = idCategoria;
                 }
 
-                idCategoria = 20;
                 
-                tx.executeSql("SELECT * FROM Asistentes WHERE idPersona = ?", [idCategoria], querySuccess, errorCB);
-                tx.executeSql("SELECT * FROM Asistentes WHERE idPersona = ?", [idCategoria], querySuccess1, errorCB);
+                
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
             }
             
         </script>
