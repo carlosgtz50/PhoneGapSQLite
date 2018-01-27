@@ -10,20 +10,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-	  <icon src="icon.png"/>
-	  <icon src="www/res/icon/android/icon-36-ldpi.png" cdv:platform="android" cdv:qualifier="ldpi"/>
-	  <icon src="www/res/icon/android/icon-48-mdpi.png" cdv:platform="android" cdv:qualifier="mdpi"/>
-	  <icon src="www/res/icon/android/icon-72-hdpi.png" cdv:platform="android" cdv:qualifier="hdpi"/>
-	  <icon src="www/res/icon/android/icon-96-xhdpi.png" cdv:platform="android" cdv:qualifier="xhdpi"/>
-	  <icon src="www/res/icon/blackberry/icon-80.png" cdv:platform="blackberry"/>
-	  <icon src="www/res/icon/blackberry/icon-80.png" cdv:platform="blackberry" cdv:state="hover"/>
-	  <icon src="www/res/icon/ios/icon-57.png" cdv:platform="ios" width="57" height="57"/>
-	  <icon src="www/res/icon/ios/icon-72.png" cdv:platform="ios" width="72" height="72"/>
-	  <icon src="www/res/icon/ios/icon-57-2x.png" cdv:platform="ios" width="114" height="114"/>
-	  <icon src="www/res/icon/ios/icon-72-2x.png" cdv:platform="ios" width="144" height="144"/>
-	  <icon src="www/res/icon/webos/icon-64.png" cdv:platform="webos"/>
-	  <icon src="www/res/icon/windows-phone/icon-48.png" cdv:platform="winphone"/>
-	  <icon src="www/res/icon/windows-phone/icon-173-tile.png" cdv:platform="winphone" cdv:role="background"/>
+	  
 	  
       <access origin="*" />
 </widget>
