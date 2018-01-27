@@ -37,51 +37,30 @@
         <script type="text/javascript" src="cordova.js"></script>
         
         <script type="text/javascript">
-            document.addEventListener("deviceready",onDeviceReady,false);
             
-            function onDeviceReady() {                              
-                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-                db.transaction(queryDB, errorCB, successCB);
-            }
-            
-            function queryDB(tx) {
-                tx.executeSql("Create table if not exists Asistentes (idPersona Integer, Confirmacion TEXT, Nombre TEXT, ApellidoPaterno TEXT, ApellidoMaterno TEXT, Sector TEXT, Zona TEXT, Fila TEXT, Asiento TEXT, Categoria TEXT, Organizacion TEXT, Acompanantes TEXT, Estacionamiento TEXT, Foto TEXT )");
-                
-                tx.executeSql("Insert into Asistentes VALUES (1, 'No', 'Carlos', 'Gutierrez', 'Lopez', 'Sector', 'Zona', 'Fila', 'Asiento', 'Categoria', 'Organizacion', 'Acompanates', 'Estacionamiento', 'Foto')");
 
-                /*tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
-                tx.executeSql("Insert into Demo VALUES (3, 'LSDFD', 'ADFGDBDFC')");
-                tx.executeSql("Insert into Demo VALUES (4, 'RWE', 'RTETABC')");
-                tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
-                tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
-                tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
-                
-                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
-                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
-            }
+            // function getData(last) {
 
-            function getData(last) {
+            //     db.transaction(function (tx) {
 
-                db.transaction(function (tx) {
+            //         var query = "SELECT firstname, lastname, acctNo FROM customerAccounts WHERE lastname = ?";
 
-                    var query = "SELECT firstname, lastname, acctNo FROM customerAccounts WHERE lastname = ?";
+            //         tx.executeSql(query, [last], function (tx, resultSet) {
 
-                    tx.executeSql(query, [last], function (tx, resultSet) {
-
-                        for(var x = 0; x < resultSet.rows.length; x++) {
-                            console.log("First name: " + resultSet.rows.item(x).firstname +
-                                ", Acct: " + resultSet.rows.item(x).acctNo);
-                        }
-                    },
-                    function (tx, error) {
-                        console.log('SELECT error: ' + error.message);
-                    });
-                }, function (error) {
-                    console.log('transaction error: ' + error.message);
-                }, function () {
-                    console.log('transaction ok');
-                });
-            }
+            //             for(var x = 0; x < resultSet.rows.length; x++) {
+            //                 console.log("First name: " + resultSet.rows.item(x).firstname +
+            //                     ", Acct: " + resultSet.rows.item(x).acctNo);
+            //             }
+            //         },
+            //         function (tx, error) {
+            //             console.log('SELECT error: ' + error.message);
+            //         });
+            //     }, function (error) {
+            //         console.log('transaction error: ' + error.message);
+            //     }, function () {
+            //         console.log('transaction ok');
+            //     });
+            // }
             
             function querySuccess(tx, results) {
                 //alert("Returned rows = " + results.rows.length);
@@ -175,7 +154,14 @@
                                                                         </span>
                                                                     </a>
                                                                 </li>
-                                                                
+                                                                <li class="m-nav__item">
+                                                                    <a href="cargarDatos.html" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-map-location"></i>
+                                                                        <span class="m-nav__link-text">
+                                                                            Cargar Datos
+                                                                        </span>
+                                                                    </a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -213,16 +199,6 @@
                 <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver    m-container m-container--responsive m-container--xxl m-page__container">
                     <div class="m-grid__item m-grid__item--fluid m-wrapper">
 
-                        <div class="m-subheader ">
-                            <div class="d-flex align-items-center">
-                                <div class="mr-auto">
-                                    <h3 class="m-subheader__title ">
-                                        Listado de Personas
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="m-content">
                             <div class="row">
                                 <div class="col-xl-12">
@@ -231,7 +207,7 @@
                                             <div class="m-portlet__head-caption">
                                                 <div class="m-portlet__head-title">
                                                     <h3 class="m-portlet__head-text">
-                                                        Listado
+                                                        Listado de Personas
                                                     </h3>
                                                 </div>
                                             </div>
@@ -361,7 +337,7 @@
                                                 <div class="col-xl-12">
 
                                                     <div class="table-responsive">
-                                                        <table id="listadoPersonas" data-toggle="table" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >
+                                                        <table data-toggle="table" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >
                                                             <thead>
                                                                 <tr>
                                                                     <th data-width="1%" data-field="No" data-sortable="true">#</th>
@@ -385,6 +361,9 @@
                                                                     <th data-field="Detalle" data-align="center">&nbsp</th>
                                                                 </tr>
                                                             </thead>
+                                                            <tbody id="listadoPersonas">
+
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>

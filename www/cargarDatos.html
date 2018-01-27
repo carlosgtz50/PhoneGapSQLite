@@ -37,29 +37,26 @@
         <script type="text/javascript" src="cordova.js"></script>
         
         <script type="text/javascript">
-            document.addEventListener("deviceready",onDeviceReady,false);
+            // document.addEventListener("deviceready",onDeviceReady,false);
             
-            
-            function querySuccess1(tx, result) {
-                alert("Second Query : ");
-            }
-            
-            function errorCB(err) {
-                alert(err.code);        
-            }
-            
-            function successCB() {
-                alert("DB operation completed successfully.");          
-            }
-
-            function goDelete() {
+            function onDeviceReady() {                              
                 var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-                db.transaction(deleteTable, errorCB);
+                db.transaction(queryDB, errorCB, successCB);
             }
+            
+            function queryDB(tx) {
+                tx.executeSql("Create table if not exists Asistentes (idPersona Integer, Confirmacion TEXT, Nombre TEXT, ApellidoPaterno TEXT, ApellidoMaterno TEXT, Sector TEXT, Zona TEXT, Fila TEXT, Asiento TEXT, Categoria TEXT, Organizacion TEXT, Acompanantes TEXT, Estacionamiento TEXT, Foto TEXT )");
+                
+                tx.executeSql("Insert into Asistentes VALUES (1, 'No', 'Carlos', 'Gutierrez', 'Lopez', 'Sector', 'Zona', 'Fila', 'Asiento', 'Categoria', 'Organizacion', 'Acompanates', 'Estacionamiento', 'Foto')");
 
-            function deleteTable(tx) {
-                tx.executeSql("DELETE FROM Asistentes",
-                        [], querySuccess1, errorCB);
+                /*tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
+                tx.executeSql("Insert into Demo VALUES (3, 'LSDFD', 'ADFGDBDFC')");
+                tx.executeSql("Insert into Demo VALUES (4, 'RWE', 'RTETABC')");
+                tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
+                tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
+                tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
+                
+                
             }
             
         </script>
@@ -170,7 +167,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="mr-auto">
                                     <h3 class="m-subheader__title ">
-                                        Listado de Personas
+                                        Carga de Datos
                                     </h3>
                                 </div>
                             </div>
@@ -184,33 +181,21 @@
                                         <div class="m-portlet__body">
                                             <div class="row">
                                                 
-                                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="goDelete();">
+                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="onDeviceReady();">
                                                         <span>
                                                             <i class="la la-refresh"></i>
                                                             <span>
-                                                                Limpiar
+                                                                Cargar Datos
                                                             </span>
                                                         </span>
                                                     </a>
                                                 </div>
 
-                                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" style="margin-left: 20px;">
-                                                    <label >
-                                                        &nbsp
-                                                    </label>
-                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="goSearch();">
-                                                        <span>
-                                                            <i class="la la-search"></i>
-                                                            <span>
-                                                                Buscar
-                                                            </span>
-                                                        </span>
-                                                    </a>
-                                                </div>
+                                                
                                             </div>
 
                                             

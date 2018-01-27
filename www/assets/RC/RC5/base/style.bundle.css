@@ -29434,7 +29434,7 @@ select.m-select2 {
 
 @media (min-width: 993px) {
   .m-page .m-page__container {
-    padding: 0 30px; }
+    padding: 0 10px; }
     .m-page--fluid .m-page .m-page__container {
       padding: 0 80px; } }
 
