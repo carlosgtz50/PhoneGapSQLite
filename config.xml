@@ -39,16 +39,6 @@
 	  <icon src="www/res/icon/webos/icon-64.png" cdv:platform="webos"/>
 	  <icon src="www/res/icon/windows-phone/icon-48.png" cdv:platform="winphone"/>
 	  <icon src="www/res/icon/windows-phone/icon-173-tile.png" cdv:platform="winphone" cdv:role="background"/>
-	  <cdv:splash src="www/res/screen/android/screen-ldpi-portrait.png" cdv:platform="android" cdv:qualifier="port-ldpi"/>
-	  <cdv:splash src="www/res/screen/android/screen-mdpi-portrait.png" cdv:platform="android" cdv:qualifier="port-mdpi"/>
-	  <cdv:splash src="www/res/screen/android/screen-hdpi-portrait.png" cdv:platform="android" cdv:qualifier="port-hdpi"/>
-	  <cdv:splash src="www/res/screen/android/screen-xhdpi-portrait.png" cdv:platform="android" cdv:qualifier="port-xhdpi"/>
-	  <cdv:splash src="www/res/screen/blackberry/screen-225.png" cdv:platform="blackberry"/>
-	  <cdv:splash src="www/res/screen/ios/screen-iphone-portrait.png" cdv:platform="ios" width="320" height="480"/>
-	  <cdv:splash src="www/res/screen/ios/screen-iphone-portrait-2x.png" cdv:platform="ios" width="640" height="960"/>
-	  <cdv:splash src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" cdv:platform="ios" width="640" height="1136"/>
-	  <cdv:splash src="www/res/screen/ios/screen-ipad-portrait.png" cdv:platform="ios" width="768" height="1024"/>
-	  <cdv:splash src="www/res/screen/ios/screen-ipad-landscape.png" cdv:platform="ios" width="1024" height="768"/>
-	  <cdv:splash src="www/res/screen/windows-phone/screen-portrait.jpg" cdv:platform="winphone"/>
+	  
       <access origin="*" />
 </widget>
