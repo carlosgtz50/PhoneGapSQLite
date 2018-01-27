@@ -14,22 +14,24 @@
         	document.addEventListener("deviceready",onDeviceReady,false);
         	
         	function onDeviceReady() {				        		
-				var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+				var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
 				db.transaction(queryDB, errorCB, successCB);
         	}
         	
         	function queryDB(tx) {
-        		tx.executeSql("Create table if not exists Demo (id Integer, name TEXT, address TEXT)");
-        		/*tx.executeSql("Insert into Demo VALUES (1, 'ABC', 'ABC')");
-        		tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
+        		tx.executeSql("Create table if not exists Asistentes (idPersona Integer, Confirmacion TEXT, Nombre TEXT, ApellidoPaterno TEXT, ApellidoMaterno TEXT, Sector TEXT, Zona TEXT, Fila TEXT, Asiento TEXT, Categoria TEXT, Organizacion TEXT, Acompanantes TEXT, Estacionamiento TEXT, Foto TEXT )");
+        		
+                tx.executeSql("Insert into Asistentes VALUES (1, 'No', 'Carlos', 'Gutierrez', 'Lopez', 'Sector', 'Zona', 'Fila', 'Asiento', 'Categoria', 'Organizacion', 'Acompanates', 'Estacionamiento', 'Foto')");
+
+        		/*tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
         		tx.executeSql("Insert into Demo VALUES (3, 'LSDFD', 'ADFGDBDFC')");
         		tx.executeSql("Insert into Demo VALUES (4, 'RWE', 'RTETABC')");
         		tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
         		tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
         		tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
         		
-			    tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
-			   	tx.executeSql('SELECT * FROM DEMO', [], querySuccess1, errorCB);
+			    tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
+			   	tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
 			}
 			
 			function querySuccess(tx, results) {
