@@ -38,6 +38,23 @@
         
         <script type="text/javascript">
             
+            document.addEventListener("deviceready",onDeviceReady,false);
+            
+            function onDeviceReady() {                              
+                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
+                db.transaction(selectTable, errorCB, successCB);
+            }
+
+
+            function goSearch() {
+                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
+                db.transaction(selectTable, errorCB);
+            }
+
+            function selectTable(tx) {
+                tx.executeSql("SELECT * FROM Asistentes",
+                        [], querySuccess, errorCB);
+            }
 
             // function getData(last) {
 
@@ -76,6 +93,9 @@
                 s += "";
 
                 $('#listadoPersonas')html(s);
+
+
+                alert("Datos cargados en la tabla");
                 
                 // document.getElementById("listadoPersonas").innerHTML = s;               
             }
@@ -89,18 +109,18 @@
             }
             
             function successCB() {
-                alert("DB operation completed successfully.");          
+                alert("DB cargada.");          
             }
 
-            function goSearch() {
-                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-                db.transaction(searchQueryDB, errorCB);
-            }
+            // function goSearch() {
+            //     var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
+            //     db.transaction(searchQueryDB, errorCB);
+            // }
 
-            function searchQueryDB(tx) {
-                tx.executeSql("SELECT * FROM Asistentes",
-                        [], querySuccess, errorCB);
-            }
+            // function searchQueryDB(tx) {
+            //     tx.executeSql("SELECT * FROM Asistentes",
+            //             [], querySuccess, errorCB);
+            // }
             
         </script>
     </head>
