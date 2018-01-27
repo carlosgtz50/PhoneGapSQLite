@@ -54,18 +54,18 @@
                 tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
                 tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
                 
-                tx.executeSql('SELECT * FROM Informe', [], querySuccess, errorCB);
-                tx.executeSql('SELECT * FROM Informe', [], querySuccess1, errorCB);
+                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
+                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
             }
             
             function querySuccess(tx, results) {
                 //alert("Returned rows = " + results.rows.length);
-                var s = "<table>";
+                var s = "";
                 for(var i=0; i< results.rows.length; i++) {
                         s += "<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).name + "</td><td>" + results.rows.item(i).address + "</td></tr>";                        
                     //alert("ID : " + results.rows.item(i).id + " Name : " + results.rows.item(i).name + " Address : " + results.rows.item(i).address);
                 }
-                s += "</table>";
+                s += "";
                 
                 document.getElementById("listadoPersonas").innerHTML = s;               
             }
