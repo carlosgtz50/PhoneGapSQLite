@@ -60,44 +60,53 @@
             
             function querySuccess(tx, results) {
                 //alert("Returned rows = " + results.rows.length);
-                var s = '<table data-toggle="table" id="tablaDatos" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >' +
-                            '<thead>' +
-                                '<tr>' +
-                                    '<th data-width="1%" data-field="No" data-sortable="true">#</th>' +
+                // var s = '<table data-toggle="table" id="tablaDatos" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >' +
+                //             '<thead>' +
+                //                 '<tr>' +
+                //                     '<th data-width="1%" data-field="No" data-sortable="true">#</th>' +
 
-                                    '<th data-width="10%" data-field="Foto" data-sortable="true" data-align="center">Foto</th>' +
+                //                     '<th data-width="10%" data-field="Foto" data-sortable="true" data-align="center">Foto</th>' +
 
-                                    '<th data-field="Nombre" data-sortable="true">Nombre (s)</th>' +
+                //                     '<th data-field="Nombre" data-sortable="true">Nombre (s)</th>' +
 
-                                    '<th data-field="ApellidoPaterno" data-sortable="true">Apellido Paterno</th>' +
+                //                     '<th data-field="ApellidoPaterno" data-sortable="true">Apellido Paterno</th>' +
 
-                                    '<th data-field="ApellidoMaterno" data-sortable="true" >Apellido Materno</th>' +
+                //                     '<th data-field="ApellidoMaterno" data-sortable="true" >Apellido Materno</th>' +
 
-                                    '<th data-field="Categoria" data-sortable="true" >Categoria</th>' +
+                //                     '<th data-field="Categoria" data-sortable="true" >Categoria</th>' +
 
-                                    '<th data-field="Lugar" data-sortable="true">Zona</th>' +
+                //                     '<th data-field="Lugar" data-sortable="true">Zona</th>' +
                                     
-                                    '<th data-field="Lugar" data-sortable="true">Fila</th>' +
+                //                     '<th data-field="Lugar" data-sortable="true">Fila</th>' +
 
-                                    '<th data-field="Lugar" data-sortable="true">Asiento</th>' +
+                //                     '<th data-field="Lugar" data-sortable="true">Asiento</th>' +
 
-                                    '<th data-field="Detalle" data-align="center">&nbsp</th>' +
-                                '</tr>' +
-                            '</thead>' +
-                            '<tbody >';
+                //                     '<th data-field="Detalle" data-align="center">&nbsp</th>' +
+                //                 '</tr>' +
+                //             '</thead>' +
+                //             '<tbody >';
+
+                var s = "";
                 for(var i=0; i< results.rows.length; i++) {
                         s += "<tr><td>" + results.rows.item(i).idPersona + "</td><td>" + results.rows.item(i).Foto + "</td><td>" + results.rows.item(i).Nombre + "</td></tr>";                        
                     //alert("ID : " + results.rows.item(i).id + " Name : " + results.rows.item(i).name + " Address : " + results.rows.item(i).address);
                 }
-                s += '</tbody>' +
-                    '</table>';
+                s += "";
                 
-                document.getElementById("listadoPersonas").innerHTML = s;      
+                document.getElementById("listadoPersonas").innerHTML = s;         
 
-                var $table = $('#tablaDatos');
+                var mydata = {
+                    "No": 1,
+                    "Foto": "Foto",
+                    "Nombre": "Nombre",
+                    "ApellidoPaterno": "Apellido Paterno",
+                    "ApellidoMaterno": "Apellido Materno"
+                };
+                var newdata = [];
 
-                // $table.bootstrapTable('destroy');   
-                $table.bootstrapTable('refresh', {silent: true});       
+                newdata.push(mydata);
+
+                $('#tablaDatos').bootstrapTable("load", newdata);    
             }
             
             function querySuccess1(tx, result) {
@@ -113,94 +122,6 @@
             }
             
         </script>
-        
-        <!-- <script type="text/javascript">
-            
-            document.addEventListener("deviceready",onDeviceReady,false);
-            
-            function onDeviceReady() {                              
-                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-                db.transaction(selectTable, errorCB, successCB);
-            }
-
-
-            function goSearch() {
-                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-                db.transaction(selectTable, errorCB);
-            }
-
-            function selectTable(tx) {
-                tx.executeSql("SELECT * FROM Asistentes",
-                        [], querySuccess, errorCB);
-            }
-
-            // function getData(last) {
-
-            //     db.transaction(function (tx) {
-
-            //         var query = "SELECT firstname, lastname, acctNo FROM customerAccounts WHERE lastname = ?";
-
-            //         tx.executeSql(query, [last], function (tx, resultSet) {
-
-            //             for(var x = 0; x < resultSet.rows.length; x++) {
-            //                 console.log("First name: " + resultSet.rows.item(x).firstname +
-            //                     ", Acct: " + resultSet.rows.item(x).acctNo);
-            //             }
-            //         },
-            //         function (tx, error) {
-            //             console.log('SELECT error: ' + error.message);
-            //         });
-            //     }, function (error) {
-            //         console.log('transaction error: ' + error.message);
-            //     }, function () {
-            //         console.log('transaction ok');
-            //     });
-            // }
-            
-            function querySuccess(tx, results) {
-                //alert("Returned rows = " + results.rows.length);
-
-                
-
-
-                var s = "";
-                for(var i=0; i< results.rows.length; i++) {
-                        s += "<tr><td>" + results.rows.item(i).idPersona + "</td><td>" + results.rows.item(i).Nombre + "</td><td>" + results.rows.item(i).ApellidoPaterno + "</td></tr>";                       
-                    //alert("ID : " + results.rows.item(i).id + " Name : " + results.rows.item(i).name + " Address : " + results.rows.item(i).address);
-                }
-                s += "";
-
-                $('#listadoPersonas')html(s);
-
-
-                alert("Datos cargados en la tabla");
-                
-                // document.getElementById("listadoPersonas").innerHTML = s;               
-            }
-            
-            function querySuccess1(tx, result) {
-                alert("Second Query : " + result.rows.length);
-            }
-            
-            function errorCB(err) {
-                alert(err.code);        
-            }
-            
-            function successCB() {
-                alert("DB cargada.");          
-            }
-
-            // function goSearch() {
-            //     var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
-            //     db.transaction(searchQueryDB, errorCB);
-            // }
-
-            // function searchQueryDB(tx) {
-            //     tx.executeSql("SELECT * FROM Asistentes",
-            //             [], querySuccess, errorCB);
-            // }
-            
-        </script> -->
     </head>
     <!-- end::Head -->
     <!-- end::Body -->
@@ -441,7 +362,34 @@
                                                 <div class="col-xl-12">
 
                                                     <div class="table-responsive" id="listadoPersonas">
-                                                        
+                                                        <table data-toggle="table" id="tablaDatos" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th data-width="1%" data-field="No" data-sortable="true">#</th>
+
+                                                                    <th data-width="10%" data-field="Foto" data-sortable="true" data-align="center">Foto</th>
+
+                                                                    <th data-field="Nombre" data-sortable="true">Nombre (s)</th>
+
+                                                                    <th data-field="ApellidoPaterno" data-sortable="true">Apellido Paterno</th>
+
+                                                                    <th data-field="ApellidoMaterno" data-sortable="true" >Apellido Materno</th>
+
+                                                                    <th data-field="Categoria" data-sortable="true" >Categoria</th>
+
+                                                                    <th data-field="Lugar" data-sortable="true">Zona</th>
+                                                                    
+                                                                    <th data-field="Lugar" data-sortable="true">Fila</th>
+
+                                                                    <th data-field="Lugar" data-sortable="true">Asiento</th>
+
+                                                                    <th data-field="Detalle" data-align="center">&nbsp</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="listadoPersonas">
+
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
