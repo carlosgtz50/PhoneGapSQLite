@@ -58,7 +58,7 @@
             }
 
             function deleteTable(tx) {
-                tx.executeSql("TRUNCATE TABLE Asistentes",
+                tx.executeSql("DELETE FROM Asistentes",
                         [], querySuccess1, errorCB);
             }
             
