@@ -37,7 +37,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         
         <script type="text/javascript">
-            // document.addEventListener("deviceready",onDeviceReady,false);
+            document.addEventListener("deviceready",onDeviceReady,false);
             
             function onDeviceReady() {                              
                 var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
@@ -55,8 +55,14 @@
                 tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
                 tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
                 tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
-                
-                
+            }
+
+            function errorCB(err) {
+                alert("No se cargaron los datos. Error: " + err.code);        
+            }
+            
+            function successCB() {
+                alert("Se cargaron los datos con exito.");          
             }
             
         </script>
