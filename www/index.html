@@ -57,12 +57,23 @@
                 tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
                 tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
             }
+
+
+            // <th data-field="Categoria" data-sortable="true" >Categoria</th>
+
+            //                                                         <th data-field="Lugar" data-sortable="true">Zona</th>
+                                                                    
+            //                                                         <th data-field="Fila" data-sortable="true">Fila</th>
+
+            //                                                         <th data-field="Asiento" data-sortable="true">Asiento</th>
+
+            //                                                         <th data-field="Detalle" data-align="center">&nbsp</th>
             
             function querySuccess(tx, results) {
 
                 var s = "";
                 var newdata = [];
-                
+
                 for(var i=0; i< results.rows.length; i++) {
 
                     var mydata = {
@@ -70,7 +81,12 @@
                                     "Foto": results.rows.item(i).Foto,
                                     "Nombre": results.rows.item(i).Nombre,
                                     "ApellidoPaterno": results.rows.item(i).ApellidoPaterno,
-                                    "ApellidoMaterno": results.rows.item(i).ApellidoMaterno
+                                    "ApellidoMaterno": results.rows.item(i).ApellidoMaterno,
+                                    "Categoria": results.rows.item(i).Categoria,
+                                    "Lugar": results.rows.item(i).Zona,
+                                    "Fila": results.rows.item(i).Fila,
+                                    "Asiento": results.rows.item(i).Asiento,
+                                    "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" datosUrl="datos/detallePersona.php?id='+ results.rows.item(i).idPersona +'" onclick="MostrarDetalle(this);">Info.</span>'
                                 };
 
                     newdata.push(mydata);
@@ -374,9 +390,9 @@
 
                                                                     <th data-field="Lugar" data-sortable="true">Zona</th>
                                                                     
-                                                                    <th data-field="Lugar" data-sortable="true">Fila</th>
+                                                                    <th data-field="Fila" data-sortable="true">Fila</th>
 
-                                                                    <th data-field="Lugar" data-sortable="true">Asiento</th>
+                                                                    <th data-field="Asiento" data-sortable="true">Asiento</th>
 
                                                                     <th data-field="Detalle" data-align="center">&nbsp</th>
                                                                 </tr>
