@@ -35,6 +35,29 @@
 			    tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
 			   	tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
 			}
+
+            function getData(last) {
+
+                db.transaction(function (tx) {
+
+                    var query = "SELECT firstname, lastname, acctNo FROM customerAccounts WHERE lastname = ?";
+
+                    tx.executeSql(query, [last], function (tx, resultSet) {
+
+                        for(var x = 0; x < resultSet.rows.length; x++) {
+                            console.log("First name: " + resultSet.rows.item(x).firstname +
+                                ", Acct: " + resultSet.rows.item(x).acctNo);
+                        }
+                    },
+                    function (tx, error) {
+                        console.log('SELECT error: ' + error.message);
+                    });
+                }, function (error) {
+                    console.log('transaction error: ' + error.message);
+                }, function () {
+                    console.log('transaction ok');
+                });
+            }
 			
 			function querySuccess(tx, results) {
 			    //alert("Returned rows = " + results.rows.length);
@@ -47,14 +70,6 @@
 			    
 			    document.getElementById("tbl").innerHTML = s;			    
 			}
-
-            function Filtrar(){
-                db.transaction(queryNuevo, errorCB, successCB);
-            }
-
-            function queryNuevo(tx){
-                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);  
-            }
 			
 			function querySuccess1(tx, result) {
 				alert("Second Query : " + result.rows.length);
@@ -67,13 +82,23 @@
 			function successCB() {
 				alert("DB operation completed successfully.");			
 			}
+
+            function goSearch() {
+                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
+                db.transaction(searchQueryDB, errorCB);
+            }
+
+            function searchQueryDB(tx) {
+                tx.executeSql("SELECT * FROM Asistentes",
+                        [], querySuccess1, errorCB);
+            }
         	
         </script>
     </head>
     <body>
         <br/><br/>
 
-        <button onclick="Filtrar();">Mostrar</button>
+        <button onclick="goSearch();">Mostrar</button>
 
         <table id="tbl"></table>
     </body>
