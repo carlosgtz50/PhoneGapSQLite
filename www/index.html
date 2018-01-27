@@ -99,7 +99,7 @@
 
             function searchQueryDB(tx) {
                 tx.executeSql("SELECT * FROM Asistentes",
-                        [], querySuccess1, errorCB);
+                        [], querySuccess, errorCB);
             }
             
         </script>
@@ -343,7 +343,9 @@
                                                 <div class="col-xl-12">
 
                                                     <div class="table-responsive">
-                                                        <table data-toggle="table" id="listadoPersonas" class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >
+                                                        <table ></table>
+
+                                                        <table data-toggle="table"  class="table" width="100%" data-search="false" data-mobile-responsive="true" data-check-on-init="true" data-show-columns="false" data-pagination="true" data-page-size="30" data-page-list="[30, 60, 90, 120]" >
                                                             <thead>
                                                                 <tr>
                                                                     <th data-width="1%" data-field="No" data-sortable="true">#</th>
@@ -367,7 +369,7 @@
                                                                     <th data-field="Detalle" data-align="center">&nbsp</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="listadoPersonas">
 
                                                             </tbody>
                                                         </table>
