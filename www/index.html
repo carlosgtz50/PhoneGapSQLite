@@ -95,6 +95,10 @@
                 
                 document.getElementById("listadoPersonas").innerHTML = s;         
 
+                  
+            }
+
+            function NuevosDatos(){
                 var mydata = {
                     "No": 1,
                     "Foto": "Foto",
@@ -106,7 +110,7 @@
 
                 newdata.push(mydata);
 
-                $('#tablaDatos').bootstrapTable("load", newdata);    
+                $('#tablaDatos').bootstrapTable("load", newdata);  
             }
             
             function querySuccess1(tx, result) {
@@ -321,7 +325,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="goSearch();">
+                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="NuevosDatos();">
                                                         <span>
                                                             <i class="la la-search"></i>
                                                             <span>
