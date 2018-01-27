@@ -122,7 +122,7 @@
                     textoBuscar = '%';
                 }
                 else{
-                    textoBuscar = textoBuscar;
+                    textoBuscar = '%' + textoBuscar  + '%';
                 }
 
                 var idCategoria = $('#frmidCategoria').val();
@@ -131,14 +131,13 @@
                     idCategoria = '%';
                 }
                 else{
-                    idCategoria = '%' + idCategoria +'%';
+                    idCategoria =  idCategoria;
                 }
 
                 
                 
-                tx.executeSql("SELECT * FROM Asistentes " +
-                                "WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"') AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
-                tx.executeSql("SELECT * FROM Asistentes WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"') AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
             }
             
         </script>
