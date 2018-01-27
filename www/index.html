@@ -124,9 +124,11 @@
                 else{
                     idCategoria = idCategoria;
                 }
+
+                idCategoria = 'H. Congreso de la Unión';
                 
-                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE ?", [idCategoria], querySuccess, errorCB);
-                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE ?", [idCategoria], querySuccess1, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria = ?", [idCategoria], querySuccess, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria = ?", [idCategoria], querySuccess1, errorCB);
             }
             
         </script>
