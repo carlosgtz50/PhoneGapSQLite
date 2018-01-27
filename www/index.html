@@ -45,30 +45,12 @@
             }
             
             function queryDB(tx) {
-                // tx.executeSql("Create table if not exists Demo (id Integer, name TEXT, address TEXT)");
-                /*tx.executeSql("Insert into Demo VALUES (1, 'ABC', 'ABC')");
-                tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
-                tx.executeSql("Insert into Demo VALUES (3, 'LSDFD', 'ADFGDBDFC')");
-                tx.executeSql("Insert into Demo VALUES (4, 'RWE', 'RTETABC')");
-                tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
-                tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
-                tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
                 
                 tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
                 tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
             }
 
 
-            // <th data-field="Categoria" data-sortable="true" >Categoria</th>
-
-            //                                                         <th data-field="Lugar" data-sortable="true">Zona</th>
-                                                                    
-            //                                                         <th data-field="Fila" data-sortable="true">Fila</th>
-
-            //                                                         <th data-field="Asiento" data-sortable="true">Asiento</th>
-
-            //                                                         <th data-field="Detalle" data-align="center">&nbsp</th>
-            
             function querySuccess(tx, results) {
 
                 var s = "";
@@ -92,32 +74,10 @@
                     newdata.push(mydata);
 
                     mydata = "";
-                        // s += "<tr><td>" + results.rows.item(i).idPersona + "</td><td>" +  + "</td><td>" +  + "</td></tr>";                        
-                    //alert("ID : " + results.rows.item(i).id + " Name : " + results.rows.item(i).name + " Address : " + results.rows.item(i).address);
                 }
-                // s += "";
 
                 $('#tablaDatos').bootstrapTable("load", newdata);  
-                
-                // document.getElementById("listadoPersonas").innerHTML = s;         
-
-                  
-            }
-
-            function NuevosDatos(){
-                var mydata = {
-                    "No": 1,
-                    "Foto": "Foto",
-                    "Nombre": "Nombre",
-                    "ApellidoPaterno": "Apellido Paterno",
-                    "ApellidoMaterno": "Apellido Materno"
-                };
-                var newdata = [];
-
-                newdata.push(mydata);
-
-                $('#tablaDatos').bootstrapTable("load", newdata);  
-                
+                                  
             }
             
             function querySuccess1(tx, result) {
@@ -148,6 +108,26 @@
                     $('#bodyModalDetalle').html("<img src='img/loading-spinner-grey.gif' alt='' class='loading'><span> &nbsp;&nbsp;Cargando... </span>");
                 });
             };
+
+            function buscarDatos() {                              
+                var db = window.openDatabase("Database", "1.0", "Informe", 2000000);
+                db.transaction(queryDB, errorCB, successCB);
+            }
+
+            function queryBuscar(tx) {
+
+                var idCategoria = $('#frmidCategoria').val();
+
+                if ( idCategoria == ''){
+                    idCategoria = '%';
+                }
+                else{
+                    idCategoria = idCategoria;
+                }
+                
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
+            }
             
         </script>
     </head>
@@ -349,7 +329,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="NuevosDatos();">
+                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="buscarDatos();">
                                                         <span>
                                                             <i class="la la-search"></i>
                                                             <span>
