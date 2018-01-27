@@ -46,8 +46,8 @@
             
             function queryDB(tx) {
                 
-                tx.executeSql('SELECT trim(Nombre) + ' ' + trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes', [], querySuccess, errorCB);
-                tx.executeSql('SELECT trim(Nombre) + ' ' + trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes', [], querySuccess1, errorCB);
+                tx.executeSql('SELECT trim(Nombre) || trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes', [], querySuccess, errorCB);
+                tx.executeSql('SELECT trim(Nombre) || trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes', [], querySuccess1, errorCB);
             }
 
 
@@ -134,11 +134,11 @@
                     idCategoria =  idCategoria;
                 }
 
-                console.log("SELECT * FROM Asistentes WHERE trim(Nombre) + ' ' + trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'");
+                console.log("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'");
                 
                 
-                tx.executeSql("SELECT trim(Nombre) + ' ' + trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes WHERE trim(Nombre) + ' ' + trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
-                tx.executeSql("SELECT trim(Nombre) + ' ' + trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes WHERE trim(Nombre) + ' ' + trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
+                tx.executeSql("SELECT trim(Nombre) || trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
+                tx.executeSql("SELECT trim(Nombre) || trim(ApellidoPaterno) AS Nombre2, * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
             }
             
         </script>
