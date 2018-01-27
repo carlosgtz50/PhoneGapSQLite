@@ -111,7 +111,7 @@
 
             function buscarDatos() {                              
                 var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
-                db.transaction(queryDB, errorCB, successCB);
+                db.transaction(queryBuscar, errorCB, successCB);
             }
 
             function queryBuscar(tx) {
