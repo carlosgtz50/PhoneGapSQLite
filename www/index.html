@@ -134,6 +134,7 @@
                     idCategoria =  idCategoria;
                 }
 
+                console.log("SELECT * FROM Asistentes WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'");
                 
                 
                 tx.executeSql("SELECT * FROM Asistentes WHERE trim( Nombre) + trim( ApellidoPaterno) + trim( ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
