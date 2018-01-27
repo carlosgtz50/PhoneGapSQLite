@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <meta name="msapplication-tap-highlight" content="no" />
+        <title>Hello World</title>
+    	<script type="text/javascript" src="cordova.js"></script>
+    	
+        <script type="text/javascript">
+        	document.addEventListener("deviceready",onDeviceReady,false);
+        	
+        	function onDeviceReady() {				        		
+				var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+				db.transaction(queryDB, errorCB, successCB);
+        	}
+        	
+        	function queryDB(tx) {
+        		tx.executeSql("Create table if not exists Demo (id Integer, name TEXT, address TEXT)");
+        		/*tx.executeSql("Insert into Demo VALUES (1, 'ABC', 'ABC')");
+        		tx.executeSql("Insert into Demo VALUES (2, 'HG', 'ABDFGDFGSC')");
+        		tx.executeSql("Insert into Demo VALUES (3, 'LSDFD', 'ADFGDBDFC')");
+        		tx.executeSql("Insert into Demo VALUES (4, 'RWE', 'RTETABC')");
+        		tx.executeSql("Insert into Demo VALUES (5, 'SDFD', 'ADFGBC')");
+        		tx.executeSql("Insert into Demo VALUES (6, 'DFGDD', 'ABDFFC')");
+        		tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
+        		
+			    tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+			   	tx.executeSql('SELECT * FROM DEMO', [], querySuccess1, errorCB);
+			}
+			
+			function querySuccess(tx, results) {
+			    //alert("Returned rows = " + results.rows.length);
+			    var s = "<table>";
+			    for(var i=0; i< results.rows.length; i++) {
+						s += "<tr><td>" + results.rows.item(i).id + "</td><td>" + results.rows.item(i).name + "</td><td>" + results.rows.item(i).address + "</td></tr>";		    		    
+			    	//alert("ID : " + results.rows.item(i).id + " Name : " + results.rows.item(i).name + " Address : " + results.rows.item(i).address);
+			    }
+			    s += "</table>";
+			    
+			    document.getElementById("tbl").innerHTML = s;			    
+			}
+			
+			function querySuccess1(tx, result) {
+				alert("Second Query : " + result.rows.length);
+			}
+			
+			function errorCB(err) {
+				alert(err.code);		
+			}
+			
+			function successCB() {
+				alert("DB operation completed successfully.");			
+			}
+        	
+        </script>
+    </head>
+    <body>
+        <br/><br/>
+        <table id="tbl"></table>
+    </body>
+</html>
