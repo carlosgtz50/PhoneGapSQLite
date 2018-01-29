@@ -68,7 +68,7 @@
                                     "Lugar": results.rows.item(i).Zona,
                                     "Fila": results.rows.item(i).Fila,
                                     "Asiento": results.rows.item(i).Asiento,
-                                    "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" datosUrl="datos/detallePersona.php?id='+ results.rows.item(i).idPersona +'" onclick="MostrarDetalle(this);">Info.</span>'
+                                    "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" onclick="MostrarDetalle('+ results.rows.item(i).idPersona +');">Info.</span>'
                                 };
 
                     newdata.push(mydata);
@@ -92,25 +92,9 @@
                 alert("DB operation completed successfully.");          
             }
 
-            function MostrarDetalle(control){
-
-                // var contenido = $(control).attr("datosUrl")
-
-                var contenido = '<div class="row">' +
-                                '<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">' +
-                                    'Foto de la persona' +
-                                '</div>';
-
-                $('#bodyModalDetalle').html(contenido);
-
-                $('#modalDetalle').modal('show').on('hidden.bs.modal', function () {
-                    
-                    $('#bodyModalDetalle').html("<img src='img/loading-spinner-grey.gif' alt='' class='loading'><span> &nbsp;&nbsp;Cargando... </span>");
-                });
-            };
-
             function buscarDatos() {                              
                 var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
+
                 db.transaction(queryBuscar, errorCB, successCB);
             }
 
@@ -137,6 +121,81 @@
                 
                 tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
                 tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
+            }
+
+            function Limpiar(){
+                $('#nombrePersona').val("");
+                $('#frmidCategoria').val("");
+
+                $( "#nombrePersona" ).focus();
+
+                buscarDatos();
+            }
+
+
+            function MostrarDetalle(PidPersona){
+
+                // var contenido = $(control).attr("datosUrl")
+
+                $('#idDetallePersona').val(PidPersona);
+
+                var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
+                db.transaction(queryDetallePersona, errorCB, successCB);
+
+            };
+
+
+            function queryDetallePersona(tx) {
+
+                var PidPersonaDetalle = $('#idDetallePersona').val();
+                
+                tx.executeSql("SELECT * FROM Asistentes WHERE idPersona = ?", [PidPersonaDetalle], muestraDetallePersona, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE idPersona = ?", [PidPersonaDetalle], querySuccess1, errorCB);
+            }
+
+            function muestraDetallePersona(tx, results) {
+
+                var s = "";
+                var newdata = [];
+
+                for(var i=0; i< results.rows.length; i++) {
+
+                    $('#Dfoto').html('<img src="fotos/100_1.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">');
+                    $('#DNombre').html(results.rows.item(i).Nombre);
+                    $('#DApellidoParterno').html(results.rows.item(i).ApellidoPaterno);
+                    $('#DApellidoMaterno').html(results.rows.item(i).ApellidoMaterno);
+                    $('#DSector').html(results.rows.item(i).Sector);
+                    $('#DCategoria').html(results.rows.item(i).Categoria);
+                    $('#DOrganizacion').html(results.rows.item(i).Organizacion);
+                    $('#DZona').html(results.rows.item(i).Zona);
+                    $('#DAsiento').html(results.rows.item(i).Asiento);
+                    $('#DConfirmacion').html(results.rows.item(i).Confirmacion);
+
+
+
+                    // var mydata = {
+                    //                 "No": results.rows.item(i).idPersona,
+                    //                 "Foto": ,
+                    //                 "Nombre": ,
+                    //                 "ApellidoPaterno": results.rows.item(i).,
+                    //                 "ApellidoMaterno": results.rows.item(i).,
+                    //                 "Categoria": results.rows.item(i).,
+                    //                 "Lugar": results.rows.item(i).,
+                    //                 "Fila": results.rows.item(i).Fila,
+                    //                 "Asiento": results.rows.item(i).,
+                    //                 "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" onclick="MostrarDetalle('+ results.rows.item(i).idPersona +');">Info.</span>'
+                    //             };
+
+                    // newdata.push(mydata);
+
+                    // mydata = "";
+                }
+
+                $('#modalDetalle').modal('show').on('hidden.bs.modal', function () {
+                    
+                    $('#bodyModalDetalle').html("<img src='img/loading-spinner-grey.gif' alt='' class='loading'><span> &nbsp;&nbsp;Cargando... </span>");
+                });  
+                                  
             }
             
         </script>
@@ -325,7 +384,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="informeGob.limpiar();">
+                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon" onclick="Limpiar();">
                                                         <span>
                                                             <i class="la la-refresh"></i>
                                                             <span>
@@ -339,7 +398,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon form-control" onclick="buscarDatos();">
+                                                    <a href="javascript:;" class="btn btn-info m-btn m-btn--icon" onclick="buscarDatos();">
                                                         <span>
                                                             <i class="la la-search"></i>
                                                             <span>
@@ -354,6 +413,7 @@
                                                 <div class="col-xl-12">
                                                     &nbsp
 
+                                                    <input type="hidden" id="idDetallePersona" value="0">    
                                                     <div class="modal fade bd-example-modal-lg" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -364,8 +424,86 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" id="bodyModalDetalle">
-                                                                    <img src="img/loading-spinner-grey.gif" alt="" class="loading">
-                                                                    <span> &nbsp;&nbsp;Cargando... </span>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" id="Dfoto">
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    <span class="m-widget14__desc">Nombre (s)</span>
+                                                                                    <h3 class="m-widget14__title" id="DNombre"></h3>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    <span class="m-widget14__desc">Apellido Paterno</span>
+                                                                                    <h3 class="m-widget14__title" id="DApellidoParterno"></h3>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    <span class="m-widget14__desc">Apellido Materno</span>
+                                                                                    <h3 class="m-widget14__title" id="DApellidoMaterno"></h3>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    &nbsp
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Sector</span>
+                                                                                    <h4 class="m-widget14__title" id="DSector"></h4>
+                                                                                </div>
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Categoria</span>
+                                                                                    <h4 class="m-widget14__title" id="DCategoria"></h4>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    <span class="m-widget14__desc">Organización</span>
+                                                                                    <h3 class="m-widget14__title" id="DOrganizacion"></h3>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12">
+                                                                                    &nbsp
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Zona</span>
+                                                                                    <h1 class="" id="DZona"></h1>
+                                                                                </div>
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Fila</span>
+                                                                                    <h1 class="" id="DFila"></h1>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Asiento</span>
+                                                                                    <h1 class="" id="DAsiento"></h1>
+                                                                                </div>
+                                                                                <div class="col-xl-6">
+                                                                                    <span class="m-widget14__desc">Confirmación</span>
+                                                                                    <h1 class="" id="DConfirmacion"></h1>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-primary ks-light" data-dismiss="modal">Cerrar</button>
