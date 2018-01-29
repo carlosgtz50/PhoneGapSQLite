@@ -81,7 +81,7 @@
             }
             
             function querySuccess1(tx, result) {
-                alert("Second Query : " + result.rows.length);
+                console.log("Second Query : " + result.rows.length);
             }
             
             function errorCB(err) {
@@ -89,7 +89,7 @@
             }
             
             function successCB() {
-                alert("DB operation completed successfully.");          
+                console.log("DB operation completed successfully.");          
             }
 
             function buscarDatos() {                              
@@ -153,12 +153,9 @@
 
             function muestraDetallePersona(tx, results) {
 
-                var s = "";
-                var newdata = [];
-
                 for(var i=0; i< results.rows.length; i++) {
 
-                    $('#Dfoto').html('<img src="fotos/100_1.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">');
+                    $('#Dfoto').html('<img src="fotos/person.png" class="col-xl-12" alt=""> ');
                     $('#DNombre').html(results.rows.item(i).Nombre);
                     $('#DApellidoParterno').html(results.rows.item(i).ApellidoPaterno);
                     $('#DApellidoMaterno').html(results.rows.item(i).ApellidoMaterno);
@@ -168,31 +165,9 @@
                     $('#DZona').html(results.rows.item(i).Zona);
                     $('#DAsiento').html(results.rows.item(i).Asiento);
                     $('#DConfirmacion').html(results.rows.item(i).Confirmacion);
-
-
-
-                    // var mydata = {
-                    //                 "No": results.rows.item(i).idPersona,
-                    //                 "Foto": ,
-                    //                 "Nombre": ,
-                    //                 "ApellidoPaterno": results.rows.item(i).,
-                    //                 "ApellidoMaterno": results.rows.item(i).,
-                    //                 "Categoria": results.rows.item(i).,
-                    //                 "Lugar": results.rows.item(i).,
-                    //                 "Fila": results.rows.item(i).Fila,
-                    //                 "Asiento": results.rows.item(i).,
-                    //                 "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" onclick="MostrarDetalle('+ results.rows.item(i).idPersona +');">Info.</span>'
-                    //             };
-
-                    // newdata.push(mydata);
-
-                    // mydata = "";
                 }
 
-                $('#modalDetalle').modal('show').on('hidden.bs.modal', function () {
-                    
-                    $('#bodyModalDetalle').html("<img src='img/loading-spinner-grey.gif' alt='' class='loading'><span> &nbsp;&nbsp;Cargando... </span>");
-                });  
+                $('#modalDetalle').modal('show');  
                                   
             }
             
@@ -405,7 +380,7 @@
                                                         </span>
                                                     </a>
                                                 </div>
-                                                <input type="text" id="idDetallePersona" value="0"> 
+                                                <input type="text" id="idDetallePersona" value="0" > 
                                             </div>
 
                                             <div class="row">
@@ -413,11 +388,11 @@
                                                     &nbsp
 
                                                        
-                                                    <div class="modal fade bd-example-modal-lg" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                                                    <div class="modal fade bd-example-modal-lg" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="TituloModalLabel" style="display: none;" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title">Datos de la Persona</h3>
+                                                                    <h3 class="modal-title" id="TituloModalLabel">Datos de la Persona</h3>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true" class="la la-close"></span>
                                                                     </button>
