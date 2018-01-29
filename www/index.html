@@ -135,8 +135,6 @@
 
             function MostrarDetalle(PidPersona){
 
-                // var contenido = $(control).attr("datosUrl")
-
                 $('#idDetallePersona').val(PidPersona);
 
                 var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
@@ -407,13 +405,14 @@
                                                         </span>
                                                     </a>
                                                 </div>
+                                                <input type="text" id="idDetallePersona" value="0"> 
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-xl-12">
                                                     &nbsp
 
-                                                    <input type="hidden" id="idDetallePersona" value="0">    
+                                                       
                                                     <div class="modal fade bd-example-modal-lg" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
