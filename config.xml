@@ -22,6 +22,9 @@
 	  <preference name="disable-cursor" value="false"/>
 	  <preference name="android-minSdkVersion" value="14"/>
 	  <preference name="android-installLocation" value="auto"/>
+
+	  <plugin name="cordova-plugin-file" spec="6.0.1" />
+
 	  <icon src="icon.png"/>
 	  <icon src="www/res/icon/android/icon-36-ldpi.png" cdv:platform="android" cdv:qualifier="ldpi"/>
 	  <icon src="www/res/icon/android/icon-48-mdpi.png" cdv:platform="android" cdv:qualifier="mdpi"/>
