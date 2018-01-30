@@ -53,7 +53,7 @@
             function read(){
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(obtenerFS){
 
-
+                console.log(obtenerFS.root);
                 obtenerFS.root.getFile("BaseRegistro.csv", null,function(entrada){
                   entrada.file(function (fichero){
                       lector = new FileReader();
