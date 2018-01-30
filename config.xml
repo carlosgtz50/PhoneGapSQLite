@@ -24,8 +24,8 @@
 	  <preference name="android-installLocation" value="auto"/>
 	  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 
-	  <plugin name="cordova-plugin-file" spec="6.0.1" />
-	  <!-- <cdv:plugin name="org.apache.cordova.file" source="npm" /> -->
+	  <!-- <plugin name="cordova-plugin-file" spec="6.0.1" /> -->
+	  <cdv:plugin name="org.apache.cordova.file" source="npm" />
 
 	  <icon src="icon.png"/>
 	  <icon src="www/res/icon/android/icon-36-ldpi.png" cdv:platform="android" cdv:qualifier="ldpi"/>
