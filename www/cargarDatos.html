@@ -41,7 +41,7 @@
             document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+                // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
                 window.resolveLocalFileSystemURI("file:///BaseRegistro.csv", onResolveSuccess, fail);
             }
 
@@ -54,7 +54,7 @@
             }
 
             function fail(evt) {
-                console.log(evt.target.error.code);
+                console.log(evt.target.error.message);
             }
 
             function queryDB(tx) {
