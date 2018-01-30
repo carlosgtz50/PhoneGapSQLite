@@ -40,7 +40,7 @@
             document.addEventListener("deviceready",onDeviceReady,false);
             
             function onDeviceReady() {                              
-                var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
+                var db = window.openDatabase("Database", "1.0", "Informe", 50*1024*1024);
                 db.transaction(queryDB, errorCB, successCB);
             }
             
@@ -93,7 +93,7 @@
             }
 
             function buscarDatos() {                              
-                var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
+                var db = window.openDatabase("Database", "1.0", "Informe", 50*1024*1024);
 
                 db.transaction(queryBuscar, errorCB, successCB);
             }
@@ -137,7 +137,7 @@
 
                 $('#idDetallePersona').val(PidPersona);
 
-                var db = window.openDatabase("Database", "1.0", "Informe", 5*1024*1024);
+                var db = window.openDatabase("Database", "1.0", "Informe", 50*1024*1024);
                 db.transaction(queryDetallePersona, errorCB, successCB);
 
             };
