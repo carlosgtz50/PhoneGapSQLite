@@ -24,7 +24,7 @@
 	  <preference name="android-installLocation" value="auto"/>
 
 	  <!-- <plugin name="cordova-plugin-file" spec="6.0.1" /> -->
-	  <gap:plugin name="org.apache.cordova.file" />
+	  <cdv:plugin name="org.apache.cordova.file" />
 
 	  <icon src="icon.png"/>
 	  <icon src="www/res/icon/android/icon-36-ldpi.png" cdv:platform="android" cdv:qualifier="ldpi"/>
