@@ -52,6 +52,8 @@
 
             function read(){
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(obtenerFS){
+
+
                 obtenerFS.root.getFile("BaseRegistro.csv", null,function(entrada){
                   entrada.file(function (fichero){
                       lector = new FileReader();
@@ -117,6 +119,14 @@
                     }
                 
                 },errorCB, successCB);
+            }
+
+            function errorCB(err) {
+                alert("No se cargaron los datos. Error: " + err.message);        
+            }
+            
+            function successCB() {
+                alert("Se cargaron los datos con exito.");          
             }
             
             // function queryDB(tx) {
@@ -5978,13 +5988,7 @@
             //     tx.executeSql("Insert into Demo VALUES (7, 'RTYT', 'DFGABC')");*/
             // }
 
-            function errorCB(err) {
-                alert("No se cargaron los datos. Error: " + err.code);        
-            }
             
-            function successCB() {
-                alert("Se cargaron los datos con exito.");          
-            }
             
         </script>
     </head>
