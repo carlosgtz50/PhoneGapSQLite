@@ -6,7 +6,7 @@
         <title>
             Gobierno del Estado de Chihuahua
         </title>
-        
+
         <meta name="description" content="Regiones Competitivas S.C.">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,12 +56,15 @@
 
                 var s = "";
                 var newdata = [];
+                var foto = "";
 
                 for(var i=0; i< results.rows.length; i++) {
 
+                    foto = '<img src="fotos/' + results.rows.item(i).idPersona + '_' + results.rows.item(i).Nombre + ' ' + results.rows.item(i).ApellidoPaterno + ' ' + results.rows.item(i).ApellidoMaterno + '.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">>'
+
                     var mydata = {
                                     "No": results.rows.item(i).idPersona,
-                                    "Foto": '<img src="fotos/100_1.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">',
+                                    "Foto": foto,
                                     "Nombre": results.rows.item(i).Nombre,
                                     "ApellidoPaterno": results.rows.item(i).ApellidoPaterno,
                                     "ApellidoMaterno": results.rows.item(i).ApellidoMaterno,
@@ -75,6 +78,7 @@
                     newdata.push(mydata);
 
                     mydata = "";
+                    foto = "";
                 }
 
                 $('#tablaDatos').bootstrapTable("load", newdata);  
@@ -154,9 +158,13 @@
 
             function muestraDetallePersona(tx, results) {
 
+                var foto = "";
+
                 for(var i=0; i< results.rows.length; i++) {
 
-                    $('#Dfoto').html('<img src="fotos/person.png" class="col-xl-12" alt=""> ');
+                    foto = '<img src="fotos/' + results.rows.item(i).idPersona + '_' + results.rows.item(i).Nombre + ' ' + results.rows.item(i).ApellidoPaterno + ' ' + results.rows.item(i).ApellidoMaterno + '.jpg" class="col-xl-12" alt="">'
+
+                    $('#Dfoto').html(foto);
                     $('#DNombre').html(results.rows.item(i).Nombre);
                     $('#DApellidoParterno').html(results.rows.item(i).ApellidoPaterno);
                     $('#DApellidoMaterno').html(results.rows.item(i).ApellidoMaterno);
@@ -166,6 +174,8 @@
                     $('#DZona').html(results.rows.item(i).Zona);
                     $('#DAsiento').html(results.rows.item(i).Asiento);
                     $('#DConfirmacion').html(results.rows.item(i).Confirmacion);
+
+                    foto = "";
                 }
 
                 $('#modalDetalle').modal('show');  
@@ -223,18 +233,10 @@
                                                                     </a>
                                                                 </li>
                                                                 <li class="m-nav__item">
-                                                                    <a href="actualizarDatos.html" class="m-nav__link">
-                                                                        <i class="m-nav__link-icon flaticon-map-location"></i>
-                                                                        <span class="m-nav__link-text">
-                                                                            Borrar Datos
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="m-nav__item">
                                                                     <a href="cargarDatos.html" class="m-nav__link">
-                                                                        <i class="m-nav__link-icon flaticon-map-location"></i>
+                                                                        <i class="m-nav__link-icon flaticon-refresh"></i>
                                                                         <span class="m-nav__link-text">
-                                                                            Cargar Datos
+                                                                            Actualizar Datos
                                                                         </span>
                                                                     </a>
                                                                 </li>
