@@ -6,6 +6,7 @@
         <title>
             Gobierno del Estado de Chihuahua
         </title>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; connect-src * 'unsafe-inline'; ">
         <meta name="description" content="Regiones Competitivas S.C.">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,129 +43,53 @@
             document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
-                // window.resolveLocalFileSystemURI("file:///BaseRegistro.csv", onResolveSuccess, fail);
+                leerArchivo();
             }
 
-            function onFileSystemSuccess(fileSystem) {
-                console.log(fileSystem.name);
-            }
+            
+            function leerArchivo(){
 
-            function onResolveSuccess(fileEntry) {
-                console.log(fileEntry.name);
-            }
+                console.log("Entro read");
+
+                db = window.openDatabase("Database", "1.0", "Informe", 50*1024*1024);
+
+                var base_url = "http://74.208.102.187/ceg_app/listadoPersonas2.json";
+                
+                $.getJSON( base_url, function(result) {
+
+                    console.log(result);
+
+                    resultJSON = result;  
+
+                    onInsert();
+                });
+              
+            },
 
             function fail(evt) {
                 console.log(evt.target.error.message);
             }
 
-            function queryDB(tx) {
-                
-                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess, errorCB);
-                tx.executeSql('SELECT * FROM Asistentes', [], querySuccess1, errorCB);
-            }
+            
 
-            function read(){
-              window.requestFileSystem( LocalFileSystem.PERSISTENT, 0, function(obtenerFS){
-
-                console.log(obtenerFS.root);
-                obtenerFS.root.getFile("BaseRegistro.csv", null,function(entrada){
-                  entrada.file(function (fichero){
-                      lector = new FileReader();
-                      lector.readAsText(fichero)
-                      lector.onload = function (evt){
-                      var csv = evt.target.result
-                      var data = $.csv.toArrays(csv);
-                      Insert(data);
-                      }
-                  });
-                          
-                });
-              });
-              
-            }
-
-            function Insert(data){
+            function onInsert(){
                 var db = window.openDatabase("Database", "1.0", "Informe", 50*1024*1024);
 
-                    
+                db.transaction(function (tx){
+                    tx.executeSql('DROP TABLE IF EXISTS Asistentes');
 
-                db.transaction(function(tx){
+                    tx.executeSql("CREATE TABLE IF NOT EXISTS Asistentes (idPersona Integer, Confirmacion TEXT, Nombre TEXT, ApellidoPaterno TEXT, ApellidoMaterno TEXT, Sector TEXT, Zona TEXT, Fila TEXT, Asiento TEXT, Categoria TEXT, Organizacion TEXT, Acompanantes TEXT, Estacionamiento TEXT, Foto TEXT )");
 
-                    tx.executeSql("Create table if not exists Asistentes (idPersona Integer, Confirmacion TEXT, Nombre TEXT, ApellidoPaterno TEXT, ApellidoMaterno TEXT, Sector TEXT, Zona TEXT, Fila TEXT, Asiento TEXT, Categoria TEXT, Organizacion TEXT, Acompanantes TEXT, Estacionamiento TEXT, Foto TEXT )");
-                  
-                    for (var i=1; i <data.length; i++){
+                    var recursiveFunction = function(index) {
 
-                        alert( "Insert into Asistentes ( " +
-                                            "idPersona, " +
-                                            "Confirmacion, " +
-                                            "Nombre, " + 
-                                            "ApellidoPaterno, " + 
-                                            "ApellidoMaterno, " + 
-                                            "Sector, " + 
-                                            "Zona, " + 
-                                            "Fila, " + 
-                                            "Asiento, " + 
-                                            "Categoria, " + 
-                                            "Organizacion, " + 
-                                            "Acompanantes, " + 
-                                            "Estacionamiento, " +
-                                            "Foto )" + 
-                                        "VALUES ( " +
-                                            data[i][0] + ", " +
-                                            "'" + data[i][1] + "' , " +
-                                            "'" + data[i][2] + "' , " +
-                                            "'" + data[i][3] + "' , " +
-                                            "'" + data[i][4] + "' , " +
-                                            "'" + data[i][5] + "' , " +
-                                            "'" + data[i][6] + "' , " +
-                                            "'" + data[i][7] + "' , " +
-                                            "'" + data[i][8] + "' , " +
-                                            "'" + data[i][9] + "' , " +
-                                            "'" + data[i][10] + "' , " +
-                                            "'" + data[i][11] + "' , " +
-                                            "'" + data[i][12] + "' , " +
-                                            "'" + data[i][13] + "' , " +
-                                            "'" + data[i][2] + "' ) " );
+                        if (index < resultJSON.length) {
 
-                        tx.executeSql("Insert into Asistentes ( " +
-                                            "idPersona, " +
-                                            "Confirmacion, " +
-                                            "Nombre, " + 
-                                            "ApellidoPaterno, " + 
-                                            "ApellidoMaterno, " + 
-                                            "Sector, " + 
-                                            "Zona, " + 
-                                            "Fila, " + 
-                                            "Asiento, " + 
-                                            "Categoria, " + 
-                                            "Organizacion, " + 
-                                            "Acompanantes, " + 
-                                            "Estacionamiento, " +
-                                            "Foto )" + 
-                                        "VALUES ( " +
-                                            data[i][0] + ", " +
-                                            "'" + data[i][1] + "' , " +
-                                            "'" + data[i][2] + "' , " +
-                                            "'" + data[i][3] + "' , " +
-                                            "'" + data[i][4] + "' , " +
-                                            "'" + data[i][5] + "' , " +
-                                            "'" + data[i][6] + "' , " +
-                                            "'" + data[i][7] + "' , " +
-                                            "'" + data[i][8] + "' , " +
-                                            "'" + data[i][9] + "' , " +
-                                            "'" + data[i][10] + "' , " +
-                                            "'" + data[i][11] + "' , " +
-                                            "'" + data[i][12] + "' , " +
-                                            "'" + data[i][13] + "' , " +
-                                            "'" + data[i][2] + "' ) " );
+                            tx.executeSql('INSERT INTO Asistentes ( idPersona, Confirmacion, Nombre) VALUES ( ?, ?, ?)',[resultJSON[index].idPersona,resultJSON[index].CONFIRMACION,resultJSON[index].Nombre], function (){index++; recursiveFunction(index)}, errorCB);
 
-                        //                 1,'No','María del Rocío','Zazueta','Osuna','SECTOR PUBLICO','A','','','H. Congreso de la Unión','Cámara de Diputados','0','','')");
-
-                        // tx.executeSql('INSERT INTO tablax (campo1, campo2, campo3, campo4, campo5, campo6, campo7) VALUES (' + data[i][0] + ', "' + data[i][1] + '","' + data[i][2] + '", "' + data[i][3] + '", "' + data[i][4] + '", "' + data[i][5] + '", "' + data[i][6] + '", "' + data[i][7] + '")');
+                        }
                     }
-                
-                },errorCB, successCB);
+                    recursiveFunction(0);
+                });
             }
 
             function errorCB(err) {
