@@ -54,13 +54,28 @@
 
             function querySuccess(tx, results) {
 
+                $.ajax({
+                  url: "/fotos/",
+                  success: function(data){
+                    console.log(data);
+
+                     $(data).find("a:contains(.jpg)").each(function(){
+                        // will loop through 
+                        var images = $(this).attr("href");
+
+                        $('<p></p>').html(images).appendTo('a div of your choice')
+
+                     });
+                  }
+                });
+
                 var s = "";
                 var newdata = [];
                 var foto = "";
 
                 for(var i=0; i< results.rows.length; i++) {
 
-                    foto = '<img src="fotos/' + results.rows.item(i).idPersona + '_' + results.rows.item(i).Nombre + ' ' + results.rows.item(i).ApellidoPaterno + ' ' + results.rows.item(i).ApellidoMaterno + '.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">>'
+                    foto = '<img src="fotos/' + results.rows.item(i).idPersona + '_' + results.rows.item(i).Nombre + ' ' + results.rows.item(i).ApellidoPaterno + ' ' + results.rows.item(i).ApellidoMaterno + '.jpg" style="height:50px;" class="m--img-rounded m--marginless m--img-centered" alt="">'
 
                     var mydata = {
                                     "No": results.rows.item(i).idPersona,
