@@ -71,7 +71,7 @@
                                     "Categoria": results.rows.item(i).Categoria,
                                     "Lugar": results.rows.item(i).Zona,
                                     "Fila": results.rows.item(i).Fila,
-                                    "Asiento": results.rows.item(i).Asiento,
+                                    "Asiento": results.rows.item(i).Bloque,
                                     "Detalle": '<span class="m-badge  m-badge--info m-badge--wide cursor" data-toggle="modal" data-target=".bd-example-modal-lg-content" onclick="MostrarDetalle('+ results.rows.item(i).idPersona +');">Info.</span>'
                                 };
 
@@ -172,7 +172,7 @@
                     $('#DCategoria').html(results.rows.item(i).Categoria);
                     $('#DOrganizacion').html(results.rows.item(i).Organizacion);
                     $('#DZona').html(results.rows.item(i).Zona);
-                    $('#DAsiento').html(results.rows.item(i).Asiento);
+                    $('#DAsiento').html(results.rows.item(i).Bloque);
                     $('#DConfirmacion').html(results.rows.item(i).Confirmacion);
 
                     foto = "";
@@ -470,7 +470,7 @@
 
                                                                             <div class="row">
                                                                                 <div class="col-xl-6">
-                                                                                    <span class="m-widget14__desc">Asiento</span>
+                                                                                    <span class="m-widget14__desc">Bloque</span>
                                                                                     <h1 class="" id="DAsiento"></h1>
                                                                                 </div>
                                                                                 <div class="col-xl-6">
@@ -514,7 +514,7 @@
                                                                     
                                                                     <th data-field="Fila" data-sortable="true">Fila</th>
 
-                                                                    <th data-field="Asiento" data-sortable="true">Asiento</th>
+                                                                    <th data-field="Asiento" data-sortable="true">Bloque</th>
 
                                                                     <th data-field="Detalle" data-align="center">&nbsp</th>
                                                                 </tr>
