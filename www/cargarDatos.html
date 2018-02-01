@@ -40,7 +40,7 @@
             document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
-                leerArchivo();
+                
             }
 
             
@@ -81,7 +81,7 @@
 
                         if (index < resultJSON.length) {
 
-                            tx.executeSql('INSERT INTO Asistentes ( idPersona, Confirmacion, Nombre, ApellidoPaterno, ApellidoMaterno, Sector, Zona, Fila, Asiento, Categoria, Organizacion, Acompanantes, Titulo, Bloque ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[resultJSON[index].idPersona, resultJSON[index].Respuesta, resultJSON[index].Nombre, resultJSON[index].ApellidoPaterno, resultJSON[index].ApellidoMaterno, resultJSON[index].Tomo, resultJSON[index].Zona, resultJSON[index].Fila, resultJSON[index].Asiento, resultJSON[index].Categoria, resultJSON[index].Organización, resultJSON[index].Acompanante, resultJSON[index].Titulo, resultJSON[index].Bloque], function (){index++; recursiveFunction(index)}, errorCB);
+                            tx.executeSql('INSERT INTO Asistentes ( idPersona, Confirmacion, Nombre, ApellidoPaterno, ApellidoMaterno, Sector, Zona, Fila, Asiento, Categoria, Organizacion, Acompanantes, Titulo, Bloque ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[resultJSON[index].idPersona, resultJSON[index].Respuesta, resultJSON[index].Nombre, resultJSON[index].ApellidoPaterno, resultJSON[index].ApellidoMaterno, resultJSON[index].Tomo, resultJSON[index].Zona, resultJSON[index].Fila, resultJSON[index].Asiento, resultJSON[index].Categoria, resultJSON[index].Organización, resultJSON[index].Acompanante, resultJSON[index].Titulo, resultJSON[index].Bloque], function (){index++; recursiveFunction(index)}, successCB, errorCB);
 
                         }
                     }
@@ -215,7 +215,7 @@
                                                     <label >
                                                         &nbsp
                                                     </label>
-                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="read();">
+                                                    <a href="javascript:;" class="btn btn-warning m-btn m-btn--icon form-control" onclick="leerArchivo();">
                                                         <span>
                                                             <i class="la la-refresh"></i>
                                                             <span>
