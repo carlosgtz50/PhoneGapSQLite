@@ -81,7 +81,7 @@
 
                         if (index < resultJSON.length) {
 
-                            tx.executeSql('INSERT INTO Asistentes ( idPersona, Confirmacion, Nombre, ApellidoPaterno, ApellidoMaterno, Sector, Zona, Fila, Asiento, Categoria, Organizacion, Acompanantes, Titulo, Bloque ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[resultJSON[index].idPersona, resultJSON[index].Respuesta, resultJSON[index].Nombre, resultJSON[index].ApellidoPaterno, resultJSON[index].ApellidoMaterno, resultJSON[index].Tomo, resultJSON[index].Zona, resultJSON[index].Fila, resultJSON[index].Asiento, resultJSON[index].Categoria, resultJSON[index].Organización, resultJSON[index].Acompanante, resultJSON[index].Titulo, resultJSON[index].Bloque], function (){index++; recursiveFunction(index)}, errorCB);
+                            tx.executeSql('INSERT INTO Asistentes ( idPersona, Confirmacion, Nombre, ApellidoPaterno, ApellidoMaterno, Sector, Zona, Fila, Asiento, Categoria, Organizacion, Acompanantes, Titulo, Bloque ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[resultJSON[index].idPersona, resultJSON[index].Respuesta, resultJSON[index].Nombre, resultJSON[index].ApellidoPaterno, resultJSON[index].ApellidoMaterno, resultJSON[index].Tomo, resultJSON[index].Zona, resultJSON[index].Fila, resultJSON[index].Asiento, resultJSON[index].Categoria, resultJSON[index].Organización, resultJSON[index].Acompanante, resultJSON[index].Titulo, resultJSON[index].Bloque], function (){index++; recursiveFunction(index)}, errorCB);
 
                         }
                     }
