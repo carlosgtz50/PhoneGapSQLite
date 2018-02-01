@@ -54,14 +54,14 @@
 
             function querySuccess(tx, results) {
 
-                $.ajax({
-                    type : "POST",
-                    url: "regresaFoto.php",
-                    success: function(data){
-                        console.log(data);
+                // $.ajax({
+                //     type : "GET",
+                //     url: "regresaFoto.php",
+                //     success: function(data){
+                //         console.log(data);
 
-                    }
-                });
+                //     }
+                // });
 
                 var s = "";
                 var newdata = [];
@@ -132,18 +132,28 @@
                     idCategoria =  idCategoria;
                 }
 
+                var idZona = $('#frmidZona').val();
+
+                if ( idZona == ''){
+                    idZona = '%';
+                }
+                else{
+                    idZona =  idZona;
+                }
+
+
                 
-                tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess, errorCB);
-                tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "'", [], querySuccess1, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "' AND Zona LIKE '" + idZona + "'", [], querySuccess, errorCB);
+                tx.executeSql("SELECT * FROM Asistentes WHERE trim(Nombre) || trim(ApellidoPaterno) || trim(ApellidoMaterno) LIKE '" + textoBuscar +"' AND Categoria LIKE '" + idCategoria + "' AND Zona LIKE '" + idZona + "'", [], querySuccess1, errorCB);
             }
 
             function Limpiar(){
                 $('#nombrePersona').val("");
-                $('#frmidCategoria').val("");
+                // $('#frmidCategoria').val("");
 
                 $( "#nombrePersona" ).focus();
 
-                buscarDatos();
+                // buscarDatos();
             }
 
 
@@ -311,7 +321,7 @@
                                                         <input class="form-control" type="text" placeholder="Buscar" style="width:100% !important;" id="nombrePersona">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                                     <!-- <div class="pull-left"> -->
                                                     <div>
                                                         <label for="frmidCategoria" >
@@ -362,6 +372,21 @@
                                                             <option value='Sistema PAN'>Sistema PAN</option>
                                                             <option value='Tribunal Superior de Justicia del Estado'>Tribunal Superior de Justicia del Estado</option>
                                                             
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                    <!-- <div class="pull-left"> -->
+                                                    <div>
+                                                        <label for="frmidZona" >
+                                                            Zona
+                                                        </label>
+                                                        <select id="frmidZona" name="frmidZona" class="form-control input-sm" onchange="buscarDatos();">
+                                                            <option value="">(Todos)</option>
+                                                            <option value='A'>A</option>
+                                                            <option value='B'>B</option>
+                                                            <option value='B1'>B1</option>
+                                                            <option value='C'>C</option>
                                                         </select>
                                                     </div>
                                                 </div>
